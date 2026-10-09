@@ -1,0 +1,76 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:BeerApp"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="BeerApp.MainWindow"
+        Title="Beer App">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+             <MenuItem Header="_Read File" Click="ReadFile_Click"/>  
+             <MenuItem Header="_Save File" Click="SaveFile_Click"/>
+        </Menu>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Button HorizontalAlignment="Left"
+                        Margin="6"
+                        Content="New beer"
+                        Click="NewBeerButton_Click" />
+                <Border BorderBrush="#CCCCCC"
+                        BorderThickness="0,0,0,2"
+                        Padding="6">
+                    <Grid ColumnDefinitions="2*,2*,2*,Auto,Auto"
+                          ColumnSpacing="12">
+                        <TextBlock Grid.Column="0"
+                                   Text="Name"
+                                   FontWeight="Bold" />
+                        <TextBlock Grid.Column="1"
+                                   Text="Price"
+                                   FontWeight="Bold" />
+                        <TextBlock Grid.Column="2"
+                                   Text="Alcohol Content"
+                                   FontWeight="Bold" />
+                    </Grid>
+                </Border>
+                <ItemsControl x:Name="Rows">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local:Beer">
+                            <Border BorderBrush="#CCCCCC"
+                                    BorderThickness="0,0,0,1"
+                                    Padding="6">
+
+                                <Grid ColumnDefinitions="2*,2*,2*,Auto,Auto"
+                                      ColumnSpacing="12">
+
+                                    <TextBlock Grid.Column="0"
+                                               Text="{Binding Name}"
+                                               VerticalAlignment="Center" />
+
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Price}"
+                                               VerticalAlignment="Center" />
+
+                                    <TextBlock Grid.Column="2"
+                                               Text="{Binding AlcoholContent}"
+                                               VerticalAlignment="Center" />
+
+                                    <Button Grid.Column="3"
+                                            Content="Edit"
+                                            Tag="{Binding}"
+                                            Click="EditButton_Click" />
+
+                                    <Button Grid.Column="4"
+                                            Content="Delete"
+                                            Tag="{Binding}"
+                                            Click="DeleteButton_Click" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
